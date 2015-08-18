@@ -27,8 +27,6 @@
     <li>figure适合整合图片,音频,视频等内容</li>
   </ul>
 
-  <p>parameter=<%=request.getParameter("user") %></p>
-
   <p> Examples: <br/>
     User form and servlet: <a href="form.html"> click me</a>
 
