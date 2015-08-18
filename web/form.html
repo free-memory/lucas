@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<form id="f1" action="user" method="post">
+    用户名:
+    <input name="name" type="text"> <br/>
+    密码:
+    <input name="pass" type="password">
+    <br/>checkbox
+    苹果<input type="checkbox" name="checkbox1" value="苹果">
+    香蕉<input type="checkbox" name="checkbox1" value="banana">
+    性别:
+    男<input type="radio" name="sex" value="male">
+    女<input type="radio" name="sex" value="female">
+    <br/>
+    喜欢的站点:
+    <select name="select">
+        <option>baidu</option>
+        <option>huaban</option>
+        <option>google</option>
+    </select><br/>
+    <textarea cols="20" rows="3" name="textarea">填写个人信息</textarea>
+    <input type="button" value="button">
+    <input type="reset" value="reset">
+    <input type="submit" value="submit">
+    <input type="submit" value="submit to another page" name="s1" formaction="index.jsp">
+</form>
+<input type="text" name="user" form="f1">
+
+</body>
+</html>

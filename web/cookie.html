@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function store(id)
+        {
+            var target = document.getElementById(id);
+            localStorage.setItem("name",target.value);
+            sessionStorage.setItem("sessionid",target.value);
+            var data = {};
+            data.name = target.value;
+            data.time = new Date().getTime();
+            var jsonstr = JSON.stringify(data);
+            localStorage.setItem("JsonData",jsonstr);
+            alert("hi");
+        }
+
+        function show(id)
+        {
+            var target = document.getElementById(id);
+            target.innerHTML = "localstoreage=" + localStorage.getItem("name") +" session=" + sessionStorage.getItem("sessionid");
+        }
+    </script>
+</head>
+<body>
+<p id="pp"></p>
+<label for="txt">input</label><input type="text" id="txt">
+<input type="button" onclick="store('txt')" value="store"><br>
+<input type="button" onclick="show('pp')" value="show">
+</body>
+</html>

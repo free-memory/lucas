@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/test.js"></script>
+    <script>
+        // error, pid还没有加载. document.getElementById("pid").innerHTML= "hello world! header. <br/>";
+    </script>
+</head>
+<body>
+<p id="pid">Hello</p>
+<script>
+    document.getElementById("pid").innerHTML += ", hello world! header. <br/>";
+    var arr = [1, 2, "3", "4s"];
+    var arr1 = [];
+    arr1[0] = null;
+    var undef;
+    var t = true;
+    var i = 5;
+    document.write(arr + " arr1[0]=" + arr1[0] + " undef=" + undef);
+    document.write("<br/> 5%2=" + (5 % 2) + " 5/2=" + (5 / 2) + " boolean + integer=" + (i + t));
+    document.write("</br>");
+
+    sumtest(10, 20);
+
+    function sumtest(a, b) {
+//        document.write("<br/> sum =");
+        //document.write(a + b);
+        try {
+            document.getElementById("pid").innerHTML += (a + b);
+            
+        } catch (err) {
+            alert(err);
+        }
+    }
+
+</script>
+test
+<button type="button" onclick="sumtest(40, 30)">计算2</button>
+</body>
+</html>

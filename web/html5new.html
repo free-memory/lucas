@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>html 5 new features</title>
+    <script>
+        window.onload = function () {
+            //let all text can be changed,except it has set value.
+            document.designMode = "On";
+        }
+    </script>
+
+</head>
+<body>
+<script>
+    function setValue() {
+        var lable = document.getElementById("lable1");
+        var textbox = lable.control;
+        textbox.value = "Lable's control";
+    }
+</script>
+<label id="lable0" contenteditable="false"> contenteditable=false</label>
+<br/>
+<label id="lable1" contenteditable="true"> contenteditable=true
+    <input type="text" contenteditable="false">
+    <br/>
+    <input type="text" placeholder="显示placeholder 提示">
+</label>
+<br/>
+<input type="button" onclick="setValue()" value="set label's default value">
+<br/>
+<input type="radio" contenteditable="false">
+<br/>
+<input type="date">
+<input type="time">
+<br/>
+<input type="datetime-local">
+<input type="number" >
+<input type="tel">
+<input type="search">
+<input type="color">
+<input type="output" value="1000">
+<div>
+    <table border=1>
+        <caption>学生升级表</caption>
+        <tr>
+            <th>姓名</th>
+            <th>级数</th>
+            <th>教练
+        </tr>
+        <tr>
+            <td>小黄</td>
+            <td>黑带一段</td>
+            <td rowspan=2>大佬</td>
+        </tr>
+        <tr>
+            <td>小红</td>
+            <td>白带X段</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

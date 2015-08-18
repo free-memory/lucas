@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p id="pid">test</p>
+<script>
+    //type 1
+    function People() {
+
+    }
+    People.prototype = {
+        name: "test",
+        age: 30,
+        echo: function () {
+            alert("People's Name is " + this.name);
+        }
+    };
+
+    function Student() {
+    }
+
+    Student.prototype = new People();
+    Student.prototype.echo = function () {
+        alert("Student's Name is " + this.name + this.sex);
+    };
+    Student.prototype.sex = "Male";
+
+    //type 2
+
+
+    var people = new People();
+    people.name = "people";
+    people.echo();
+
+    var student = new Student();
+    student.echo();
+
+
+</script>
+</body>
+</html>

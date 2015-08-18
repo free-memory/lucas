@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="width: 80%; margin: 6px auto">
+    <h1>Java script 事件捕获和冒泡机制</h1>
+
+    <div class="article-entry" >
+
+
+        <p>在前端开发中，我们经常需要对某些事件进行监听。这样只要在指定的元素上触发了该事件，就会执行一个回调来进行相关的操作。</p>
+
+        <p>而js中事件监听方法总共有三种，分别如下所示：</p>
+        <ul>
+            <li>element.addEventListener(type, listener[, useCapture]); // IE6~8不支持</li>
+            <li>element.attachEvent(’on’ + type, listener); // IE6~10，IE11不支持</li>
+            <li>element[’on’ + type] = function(){} // 所有浏览器</li>
+        </ul>
+        <p><strong>demo:</strong></p>
+<pre class="brush: javascript; gutter: false; first-line: 1">function cb() { console.log(1); }
+element.addEventListener('click', cb, false);
+element.attachEvent('onclick', cb);
+element.onclick = cb;</pre>
+        <p><strong>参数含义：</strong></p>
+
+        <p><code>type</code>：事件类型</p>
+
+        <p><code>listener</code>：事件触发后的回调函数</p>
+
+        <p><code>useCapture</code>：是否使用捕获，如果值为true， useCapture 表示用户希望发起捕获。 在发起捕获之后，
+            只要Dom子树下发生了该事件类型，都会先被该事件监听器捕获，然后再被派发到Dom子树中的事件监听器中。并且向上冒泡的事件不会触发那些发起捕获的事件监听器。进一步的解释可以查看 DOM Level 3 Events
+            文档。 useCapture 默认值为<code>false</code> 。</p>
+
+        <p><code>addEventListener</code>是W3C工作组在DOM Level 2开始引入的一个注册事件监听器的方法；而在此之前，传统的事件监听方法是通过<code>element[’on’ +
+            type]</code>的方式来注册的。它们两之间的主要区别是，<code>element[’on’ + type]</code>的方式无法使用事件捕获，并且<code>element[’on’ +
+            type]</code>不支持对同一个元素的同一个事件注册多个事件监听器。如下面的例子所示，元素被点击后只会输出1，而不会输出0和1.</p>
+<pre class="brush: javascript; gutter: false; first-line: 1">element.onclick = function(){ console.log(0); }
+element.onclick = function(){ console.log(1); }</pre>
+        <p>然而<code>addEventListener</code>方法在IE6~8的浏览器中不被支持。那么在低版本的IE中怎么来为同一个事件注册多个事件监听器呢？原来IE从IE5.0系列开始就引入了<code>attachEvent()</code>方法来支持这一特性。但遗憾的是该方法也不支持事件捕获。并且从IE
+            11开始，这个方法已经被弃用。</p>
+
+        <h3>谈谈事件的捕获和冒泡</h3>
+
+        <p><img class="aligncenter" title=""
+                src="http://static.codeceo.com/images/2015/03/377e7692346919fe5be175a877e9f2eb.png"
+                alt="enter image description here"/></p>
+
+        <p>W3C规范中定义了3个事件阶段，依次是捕获阶段、目标阶段、冒泡阶段。事件对象按照上图的传播路径依次完成这些阶段。如果某个阶段不支持或事件对象的传播被终止，那么该阶段就会被跳过。举个例子，如果<code>Event.bubbles</code>属性被设置为<code>false</code>，那么冒泡阶段就会被跳过。如果<code>Event.stopPropagation()</code>在事件派发前被调用，那么所有的阶段都会被跳过。
+        </p>
+        <ul>
+            <li><strong>捕获</strong> 阶段：在事件对象到达事件目标之前，事件对象必须从window经过目标的祖先节点传播到事件目标。
+                这个阶段被我们称之为捕获阶段。在这个阶段注册的事件监听器在事件到达其目标前必须先处理事件。
+            </li>
+            <li><strong>目标</strong> 阶段：事件对象到达其事件目标。
+                这个阶段被我们称为目标阶段。一旦事件对象到达事件目标，该阶段的事件监听器就要对它进行处理。如果一个事件对象类型被标志为不能冒泡。那么对应的事件对象在到达此阶段时就会终止传播。
+            </li>
+            <li><strong>冒泡</strong> 阶段： 事件对象以一个与捕获阶段相反的方向从事件目标传播经过其祖先节点传播到window。这个阶段被称之为冒泡阶段。在此阶段注册的事件监听器会对相应的冒泡事件进行处理。
+            </li>
+        </ul>
+        <p>在一个事件完成了所有阶段的传播路径后，它的<code>Event.currentTarget</code>会被设置为<code>null</code>并且<code>Event.eventPhase</code>会被设为0。<code>Event</code>的所有其他属性都不会改变（包括指向事件目标的<code>Event.target</code>属性）
+        </p>
+    </div>
+    <input type="button" value="测试事件冒泡"/>
+    <button type="button" id="mybutton" onclick="showtype(event)">show事件类型</button>
+    <script>
+
+        document.getElementsByTagName("input")[0].addEventListener("click", function (e) {
+            this.style.border = "5px solid red";
+            alert("input");
+            e.stopPropagation(); //阻止冒泡
+        }, true);
+
+        document.getElementsByTagName("div")[0].addEventListener("click", function () {
+            this.style.border = "5px solid green";
+            alert("div 监听");
+        }, true);
+
+        document.getElementsByTagName("body")[0].addEventListener("click", function () {
+            this.style.border = "5px solid yellow";
+            alert("body");
+        }, false);  //阻止监听
+
+        function showtype(event)
+        {
+            event.stopPropagation(); //阻止冒泡
+            alert(event.target.attributes.getNamedItem("id").nodeValue);
+        }
+    </script>
+</div>
+</body>
+</html>
