@@ -9,11 +9,14 @@
 
 <p id="pid">Hello world</p>
 
-<div id="divid">Div</div>
+<div id="divid">User Name
+    <input type="text" id="inputid" placeholder=" user name">
+</div>
 
-<a id="aid" href="#"> Ajax call </a>
+<a id="aid" href="#"> Ajax call with Get </a> <br/>
+<a id="aid2" href="#"> Ajax call with Post </a> <br/>
 
-<button id="btnid" type="button" style="margin: 8px 2px; padding: 2px 4px 2px 4px">点我</button>
+<button id="btnid" type="button" style="margin: 8px 2px; padding: 2px 4px 2px 4px">点我操作dom</button>
 
 <script>
     $(document).ready(function () {
@@ -26,9 +29,15 @@
         });
 
         $("#aid").on("click", function () {
-            $.get("")
+            $.get("user", {name: $("#inputid").val()}, function (data) {
+                $("<p> ajax (get) return = " + data + "</p>").insertAfter("#btnid");
+            })
         });
-
+        $("#aid2").on("click", function () {
+            $.post("user", {name: $("#inputid").val()}, function (data) {
+                $("<p> ajax (post) return = " + data + "</p>").insertAfter("#btnid");
+            })
+        });
     })
 </script>
 </body>

@@ -23,7 +23,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
         userinfo.setName(request.getParameter("name"));
 
         response.setContentType("text/html;charset=UTF-8");
-        if (request.getMethod() == "get") {
+        if (request.getMethod().equalsIgnoreCase ("get")) {
             response.getOutputStream().println("user name="
                     + request.getParameter("name")
                     + "<br/> sex=" + request.getParameter("sex")
