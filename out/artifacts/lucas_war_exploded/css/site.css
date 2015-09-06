@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.top {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
+
+.header{
+    width: 75%;
+    height: 50px;
+    margin: 0px auto; /* auto是为了左右居中*/
+    background-color: darkcyan;
+}
+
+.body{
+    width: 75%;
+    height: 500px;
+    margin: 10px auto;
+    background-color: antiquewhite;
+}
+
+.body_content{
+    width: 100%;
+    height: 400px;
+    margin: 0px auto;
+    background-color: cornflowerblue;
+}
+
+.footer{
+    width: 100%;
+    height: 100px;
+    margin: 0px auto;
+    background-color: black;
+}

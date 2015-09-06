@@ -21,20 +21,21 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
     private void doGetPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         User userinfo = new User();
         userinfo.setName(request.getParameter("name"));
+        userinfo.setSex(request.getParameter("sex"));
 
         response.setContentType("text/html;charset=UTF-8");
         if (request.getMethod().equalsIgnoreCase ("get")) {
             response.getOutputStream().println("user name="
-                    + request.getParameter("name")
-                    + "<br/> sex=" + request.getParameter("sex")
+                    + userinfo.getName()
+                    + "<br/> sex=" + userinfo.getSex()
                     + "<br/> select=" + request.getParameter("select")
                     + "<br/> textarea=" + request.getParameter("textarea")
                     + "<br/> pass=" + request.getParameter("pass"));
             if (request.getParameterValues("checkbox1") != null)
                 response.getOutputStream().println(" checkbox=" + Arrays.asList(request.getParameterValues("checkbox1")));
         } else {
-            JSONObject jsonData = new JSONObject();
-            jsonData.put("name", userinfo.getName());
+            JSONObject jsonData = new JSONObject(userinfo);
+//            jsonData.put("name", userinfo.getName());
             response.getOutputStream().println(jsonData.toString());
         }
     }

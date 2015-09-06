@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS basic</title>
+    <link href="css/basic.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h2>我是H2</h2>
+
+<p>I'm normal text, it uses body default style</p>
+
+<p><strong> P and strong, it will adopt strong css</strong></p>
+<ul>
+    <li><strong> Li and Strong, it uses sepcial Li Strong css</strong></li>
+</ul>
+<br/>
+<hr/>
+<ul>
+    <div id="divid">ID选择器 <a href="wwww.baidu.com"> Link用特殊样式,但是font还是会继承父的设定 </a></div>
+
+    <p class="pclass">类选择器 <a href="ssss"> link</a></p>
+
+    <p title1="xxxxx"> 属性选择器</p>
+
+    <p title1="email">属性和值选择器</p>
+</ul>
+
+<hr/>
+<ol>总结:
+    <li>样式选择器支持2种类型: 1.派生选择器 2. id选择器(#) 3.类选择器(.) 4.属性选择器[]</li>
+    <li>样式采用继承的原理,定义越精确的样式会覆盖定义更广泛的定义</li>
+    <li>样式中没有赋值的属性,将会采用父的属性值,所以所有的字体都是斜体了,因为只有body里面指定了字体type</li>
+
+
+</ol>
+</body>
+</html>

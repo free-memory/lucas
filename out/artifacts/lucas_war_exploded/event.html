@@ -8,7 +8,7 @@
 <div style="width: 80%; margin: 6px auto">
     <h1>Java script 事件捕获和冒泡机制</h1>
 
-    <div class="article-entry">
+    <div class="article-entry" >
 
 
         <p>在前端开发中，我们经常需要对某些事件进行监听。这样只要在指定的元素上触发了该事件，就会执行一个回调来进行相关的操作。</p>
@@ -63,14 +63,6 @@ element.onclick = function(){ console.log(1); }</pre>
         <p>在一个事件完成了所有阶段的传播路径后，它的<code>Event.currentTarget</code>会被设置为<code>null</code>并且<code>Event.eventPhase</code>会被设为0。<code>Event</code>的所有其他属性都不会改变（包括指向事件目标的<code>Event.target</code>属性）
         </p>
     </div>
-
-    <div>
-        <ul>jQuery 方法:
-            <li>简便的方法,直接指定特定事件. $().click(funcion(){alert})   缺点: 事件多了以后占内存</li>
-            <li>用事件绑定:  $().on("click",funcion(event){alert})   优点: 性能好,可以同时绑定多个方法来处理事件</li>
-        </ul>
-
-    </div>
     <input type="button" value="测试事件冒泡"/>
     <button type="button" id="mybutton" onclick="showtype(event)">show事件类型</button>
     <script>
@@ -91,7 +83,8 @@ element.onclick = function(){ console.log(1); }</pre>
             alert("body");
         }, false);  //阻止监听
 
-        function showtype(event) {
+        function showtype(event)
+        {
             event.stopPropagation(); //阻止冒泡
             alert(event.target.attributes.getNamedItem("id").nodeValue);
         }

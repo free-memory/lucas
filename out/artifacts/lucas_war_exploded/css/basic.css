@@ -1,0 +1,44 @@
+h1, h2 {
+    color: blue;
+    font-size: 20px;
+}
+
+body {
+    color: red;
+    font-style: italic;
+}
+
+/* CSS派生选择器 li strong just like sub class of strong, it can't be overwrite by strong style*/
+li strong {
+    color: aqua;
+}
+
+strong {
+    color: bisque;
+}
+
+/*Id 选择器*/
+
+#divid {
+    font-size: 22px;
+    color: brown;
+}
+
+#divid a {
+    color: cornflowerblue;
+}
+
+/*class 选择器*/
+.pclass, .pclass a {
+    color: darkcyan;
+}
+
+/*属性和值选择器*/
+[title1] {
+    color: chartreuse;
+}
+
+[title1=email] {
+    color: darkcyan;
+    font-size: 12px;
+}

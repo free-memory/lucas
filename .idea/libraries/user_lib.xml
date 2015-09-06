@@ -1,0 +1,34 @@
+<component name="libraryTable">
+  <library name="user_lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/annotations-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-commons.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm-tree.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/asm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-fileupload.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/freemarker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javassist.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.annotation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.ejb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.jms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.resource.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.transaction.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ognl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/struts2-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xwork-core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/annotations-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/json.jar!/" />
+    </SOURCES>
+  </library>
+</component>

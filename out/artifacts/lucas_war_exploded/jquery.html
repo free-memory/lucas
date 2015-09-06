@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<p id="pid" style="color:red;font-size: 22px; height: 120px;">Hello world</p>
+<p id="pid">Hello world</p>
 
 <div id="divid">User Name
     <input type="text" id="inputid" placeholder=" user name">
@@ -16,39 +16,10 @@
 <a id="aid" href="#"> Ajax call with Get </a> <br/>
 <a id="aid2" href="#"> Ajax call with Post </a> <br/>
 
-<button id="btnid" type="button" style="margin: 8px 2px; padding: 2px 4px 2px 4px">点我操作dom</button>
+<button id="btnid" type="button" style="margin: 8px 2px; padding: 2px 4px 2px 4px">点我</button>
 
 <script>
-    //    var a = (function (){
-    //        alert("hi");
-    //    });
-
-    //a();
-
-    //把匿名函数当做表达式就可以了
-    (function () {
-        alert("(fun)()");
-    })();
-
-    (function () {
-        alert("(fun)");
-    }());
-
-    void function () {
-        alert("void fun()()")
-    }();
-
-    ~function () {
-        alert("~ fun()()")
-    }();
-
-
-    $(function () {
-        alert("hi jquery");
-    });
-
     $(document).ready(function () {
-        //alert("hello");
         $("#pid").click(function () {
             $("#pid").html("test<i>bold</i> html").css("background-color", "red");
         });
@@ -64,7 +35,7 @@
         });
         $("#aid2").on("click", function () {
             $.post("user", {name: $("#inputid").val()}, function (data) {
-                $("<p> ajax (post) return = " + data + "</p>").insertAfter("#btnid").css("background-color", "aliceblue");
+                $("<p> ajax (post) return = " + data + "</p>").insertAfter("#btnid");
             })
         });
     })
