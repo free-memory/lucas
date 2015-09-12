@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery UI</title>
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<link type="text/css" href="jquery-ui.min.css" rel="stylesheet">
+	<!--<link type="text/css" href="jquery-ui.css" rel="stylesheet">-->
+	<!--<link type="text/css" href="jquery-ui.theme.min.css" rel="stylesheet">-->
+	<!--<link type="text/css" href="jquery-ui.structure.min.css" rel="stylesheet">-->
+</head>
+<body>
+<h2>Button:</h2>
+<button id="oldbtn" type="button" onclick="alert('old')">old button</button>
+<button id="newbtn" type="button" onclick="alert('new')">new button</button>
+
+<h2>Div:</h2>
+
+<div id="olddiv" style="width: 300px;border-color: #0073ea; border-style: solid">Old Div</div>
+<div id="newdiv" style="width: 300px; border-color: red; border-style: solid">New Div</div>
+
+<h2>Date Pickup:</h2>
+<input type="text" id="newdata" placeholder="选择时间">
+<div id="test"></div>
+
+<script>
+	$(document).ready(function () {
+		$("#newbtn").button();
+		$("#newdiv").draggable();
+		$("#newdata").datepicker();
+	});
+
+</script>
+</body>
+</html>

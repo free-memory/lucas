@@ -9,7 +9,7 @@
             var target = document.getElementById(id);
             localStorage.setItem("name",target.value);
             sessionStorage.setItem("sessionid",target.value);
-            var data = new Object();
+            var data = {};
             data.name = target.value;
             data.time = new Date().getTime();
             var jsonstr = JSON.stringify(data);
