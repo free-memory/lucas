@@ -4,12 +4,13 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by ken on 15/9/12.
+ * Created by ken on 15/9/1.
  */
 @Entity
 @Table(name = "article", schema = "", catalog = "mydb")
 public class ArticleEntity {
     private int id;
+    private int siteid;
     private String link;
     private String title;
     private String article;
@@ -23,6 +24,16 @@ public class ArticleEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "siteid")
+    public int getSiteid() {
+        return siteid;
+    }
+
+    public void setSiteid(int siteid) {
+        this.siteid = siteid;
     }
 
     @Basic
@@ -73,6 +84,7 @@ public class ArticleEntity {
         ArticleEntity that = (ArticleEntity) o;
 
         if (id != that.id) return false;
+        if (siteid != that.siteid) return false;
         if (link != null ? !link.equals(that.link) : that.link != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (article != null ? !article.equals(that.article) : that.article != null) return false;
@@ -83,10 +95,23 @@ public class ArticleEntity {
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + siteid;
         result = 31 * result + (link != null ? link.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (article != null ? article.hashCode() : 0);
         result = 31 * result + (createtime != null ? createtime.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleEntity{" +
+                "id=" + id +
+                ", siteid=" + siteid +
+                ", link='" + link + '\'' +
+                ", title='" + title + '\'' +
+                ", article='" + article + '\'' +
+                ", createtime=" + createtime +
+                '}';
     }
 }

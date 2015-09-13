@@ -4,7 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/mydb</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/mydb?useUnicode=true&amp;characterEncoding=UTF-8
+        </property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <mapping class="iken.persistence.entity.ArticleEntity"/>
         <mapping class="iken.persistence.entity.SiteEntity"/>

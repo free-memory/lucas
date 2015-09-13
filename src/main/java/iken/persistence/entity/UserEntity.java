@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
- * Created by ken on 15/9/12.
+ * Created by ken on 15/8/26.
  */
 @Entity
 @Table(name = "user", schema = "", catalog = "mydb")
@@ -89,5 +89,16 @@ public class UserEntity {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (lastupdate != null ? lastupdate.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", birthday=" + birthday +
+                ", lastupdate=" + lastupdate +
+                '}';
     }
 }

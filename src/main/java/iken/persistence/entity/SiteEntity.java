@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * Created by ken on 15/9/12.
+ * Created by ken on 15/9/1.
  */
 @Entity
 @Table(name = "site", schema = "", catalog = "mydb")
@@ -75,5 +75,15 @@ public class SiteEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (createdtime != null ? createdtime.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SiteEntity{" +
+                "siteid=" + siteid +
+                ", siteurl='" + siteurl + '\'' +
+                ", name='" + name + '\'' +
+                ", createdtime=" + createdtime +
+                '}';
     }
 }
