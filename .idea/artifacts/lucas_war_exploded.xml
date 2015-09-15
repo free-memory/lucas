@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="lucas:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/lucas_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lucas/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lucas" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate" />
+          <element id="library" level="project" name="Spring" />
+          <element id="library" level="project" name="json" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
