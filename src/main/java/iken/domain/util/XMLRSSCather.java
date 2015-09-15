@@ -1,5 +1,6 @@
-package iken.domain;
+package iken.domain.util;
 
+import iken.domain.object.Article;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -37,6 +38,7 @@ public class XMLRSSCather {
                 article.setLink(itemElement.element("link").getStringValue());
                 article.setTitle(itemElement.element("title").getStringValue());
                 article.setSiteid(siteId);
+                article.setCreatetimeByString(itemElement.element("pubDate").getStringValue());
 
                 articles.add(article);
             }

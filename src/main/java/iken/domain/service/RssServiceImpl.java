@@ -1,5 +1,8 @@
-package iken.domain;
+package iken.domain.service;
 
+import iken.domain.object.Article;
+import iken.domain.object.Site;
+import iken.domain.util.XMLRSSCather;
 import iken.persistence.DBConnectionUtil;
 import iken.persistence.entity.ArticleEntity;
 import iken.persistence.entity.SiteEntity;
@@ -12,6 +15,7 @@ import java.util.List;
  * Created by ken on 15/8/27.
  */
 public class RssServiceImpl implements RssService {
+    public static final String ENTITY_SITE_ENTITY = "iken.persistence.entity.SiteEntity";
     private String articleEntityName = "iken.persistence.entity.ArticleEntity";
 
     /**
@@ -20,9 +24,10 @@ public class RssServiceImpl implements RssService {
      * @return
      */
     @Override
-    public List<Article> getArticles() {
+    public List<Article> getArticles(String siteId) {
         ArrayList<Article> artList = new ArrayList<>();
-        List<ArticleEntity> entityList = (List<ArticleEntity>) DBConnectionUtil.getQuery("from " + articleEntityName);
+        String sql = "from " + articleEntityName + " as article where article.siteid = " + siteId;
+        List<ArticleEntity> entityList = (List<ArticleEntity>) DBConnectionUtil.getQuery(sql);
         for (ArticleEntity entity : entityList) {
             Article article = new Article();
             BeanUtils.copyProperties(entity, article);
@@ -41,7 +46,7 @@ public class RssServiceImpl implements RssService {
      */
     @Override
     public int catchArticles(String siteID) {
-        SiteEntity siteEntity = (SiteEntity) DBConnectionUtil.getAObject("iken.persistence.entity.SiteEntity", Integer.valueOf(siteID));
+        SiteEntity siteEntity = (SiteEntity) DBConnectionUtil.getAObject(ENTITY_SITE_ENTITY, Integer.valueOf(siteID));
         System.out.println("SiteEntity =" + siteEntity);
         List<Article> articleList = new ArrayList<>();
 
@@ -70,6 +75,25 @@ public class RssServiceImpl implements RssService {
 
         DBConnectionUtil.addData(articleEntity);
         return articleEntity.getId();
+    }
+
+    /**
+     * Get all sites
+     *
+     * @return
+     */
+    @Override
+    public List<Site> getSites() {
+        ArrayList<Site> siteList = new ArrayList<>();
+        List<SiteEntity> entityList = (List<SiteEntity>) DBConnectionUtil.getQuery("from " + ENTITY_SITE_ENTITY);
+        for (SiteEntity siteEntity : entityList) {
+            Site site = new Site();
+            BeanUtils.copyProperties(siteEntity, site);
+            siteList.add(site);
+        }
+
+        System.out.println("Entity List =" + siteList);
+        return siteList;
     }
 
 

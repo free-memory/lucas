@@ -1,28 +1,28 @@
-package iken.domain;
+package iken.domain.object;
 
 /**
  * Created by ken on 15/9/1.
  */
 public class Site {
-    private int id;
+    private int siteId;
     private String name;
     private String siteUrl;
 
     @Override
     public String toString() {
         return "Site{" +
-                "id=" + id +
+                "siteId=" + siteId +
                 ", name='" + name + '\'' +
                 ", siteUrl='" + siteUrl + '\'' +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getSiteid() {
+        return siteId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSiteid(int id) {
+        this.siteId = id;
     }
 
     public String getName() {

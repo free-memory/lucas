@@ -1,5 +1,6 @@
-package iken.domain;
+package iken.domain.service;
 
+import iken.domain.object.User;
 import iken.persistence.DBConnectionUtil;
 import iken.persistence.entity.UserEntity;
 import org.springframework.beans.BeanUtils;

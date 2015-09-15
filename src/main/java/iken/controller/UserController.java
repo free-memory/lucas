@@ -1,8 +1,8 @@
 package iken.controller;
 
-import iken.domain.User;
-import iken.domain.UserService;
-import iken.domain.UserServiceImpl;
+import iken.domain.object.User;
+import iken.domain.service.UserService;
+import iken.domain.service.UserServiceImpl;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;

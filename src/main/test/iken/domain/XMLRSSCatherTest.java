@@ -1,5 +1,6 @@
 package iken.domain;
 
+import iken.domain.util.XMLRSSCather;
 import junit.framework.TestCase;
 import org.junit.Test;
 

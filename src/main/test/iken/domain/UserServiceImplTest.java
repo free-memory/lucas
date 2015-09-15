@@ -1,5 +1,7 @@
 package iken.domain;
 
+import iken.domain.object.User;
+import iken.domain.service.UserServiceImpl;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;

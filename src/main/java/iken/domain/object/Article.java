@@ -1,6 +1,9 @@
-package iken.domain;
+package iken.domain.object;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by ken on 15/8/27.
@@ -60,6 +63,16 @@ public class Article {
 
     public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
+    }
+
+    public void setCreatetimeByString(String strDate) {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+        try {
+            Timestamp tm = new Timestamp(df.parse(strDate).getTime());
+            this.createtime = tm;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

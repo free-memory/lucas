@@ -1,4 +1,6 @@
-package iken.domain;
+package iken.domain.service;
+
+import iken.domain.object.User;
 
 import java.util.List;
 

@@ -7,8 +7,9 @@
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
+
 </head>
-<body ng-controller="TaskCtrl">
+<body ng-controller="TaskCtrl" ng-init="initPage('1001')">
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
@@ -90,38 +91,44 @@
             <ul class="nav nav-list">
                 <li class="nav-header">
                     RSS订阅列表
+                    <a class="right" href="javascript:" ng-click="catchAritcles()"><img src="img/refresh.jpg" width="16" height="16"> </a>
                 </li>
-                <li class="active">
-                    <a href="#">占豪的博客</a>
-                </li>
-                <li>
-                    <a href="#">汉唐归来</a>
+                <li class="{{styles[item.siteid]}}" ng-repeat="item in sites">
+                    <a href="javascript:" ng-click="fectureAritcles(item.siteid)">{{item.name}}</a>
                 </li>
             </ul>
         </div>
         <div class="span4">
-            <ul class="thumbnails">
-                <li ng-repeat="item in articles"
-                    ng-click="show(item.link)">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/city.jpg"/>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        标题
+                    </th>
+                    <th>
+                        时间
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="item in articles"
+                       ng-click="show(item.link)">
+                <tr>
+                    <td>
+                        {{item.id}}
+                    </td>
+                    <td>
+                        {{item.title}}
+                    </td>
+                    <td>
+                        {{item.createtime}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-                        <div class="caption">
-                            <h3>
-                                {{item.title}}
-                            </h3>
-
-                            <p>
-                                <!--{{item.article}}-->
-                            </p>
-
-                            <p class="text-right">
-                                <a class="btn btn-primary" href="#">浏览</a>
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
             <div class="pagination text-center">
                 <ul>
                     <li>
@@ -159,39 +166,7 @@
         </div>
     </div>
 </div>
-<script>
-    var app = angular.module('rss', []);
-    app.controller('TaskCtrl', function ($scope, $http) {
-                $http.get("http://localhost:8080/articles")
-                        .success(function (response) {
-                            $scope.articles = response.data;
-                        });
-                $scope.show = function (link) {
-                    for (var i in $scope.articles) {
-                        if ($scope.articles[i].link == link) {
-                            $scope.content = $scope.articles[i].article;
-                            $scope.title = $scope.articles[i].title;
-                            break;
-                        }
-                    }
-                };
-            }
-    );
-
-    app.filter('to_trusted', ['$sce', function ($sce) {
-                return function (text) {
-                    return $sce.trustAsHtml(text);
-                }
-            }]
-    );
-    //    angular.module("list",[]).controller("BlogListCtrl", BlogListCtrl).filter(
-    //            'to_trusted', ['$sce', function ($sce) {
-    //                return function (text) {
-    //                    return $sce.trustAsHtml(text);
-    //                }
-    //            }]
-    //)
-</script>
+<script src="js/rss.js"></script>
 
 </body>
 </html>

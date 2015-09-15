@@ -1,4 +1,7 @@
-package iken.domain;
+package iken.domain.service;
+
+import iken.domain.object.Article;
+import iken.domain.object.Site;
 
 import java.util.List;
 
@@ -11,7 +14,7 @@ public interface RssService {
      *
      * @return
      */
-    List<Article> getArticles();
+    List<Article> getArticles(String siteId);
 
 
     /**
@@ -29,4 +32,12 @@ public interface RssService {
      * @return
      */
     int addArticle(Article article);
+
+    /**
+     * Get all sites
+     *
+     * @return
+     */
+    List<Site> getSites();
+
 }

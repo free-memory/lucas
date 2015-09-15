@@ -1,4 +1,4 @@
-package iken.domain;
+package iken.domain.object;
 
 
 import org.json.JSONObject;
