@@ -1,1 +1,1 @@
-# Lucas project is a RSS reader project
+# Lucas project is a RSS reader
