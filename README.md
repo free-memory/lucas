@@ -1,1 +1,1 @@
-# This is lucas project
+# Lucas project is a RSS reader
