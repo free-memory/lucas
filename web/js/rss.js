@@ -1,10 +1,15 @@
 /**
+ * This file is for RSS data control
  * Created by ken on 15/9/14.
  */
 
-//TODO: 1. 获取文章,并且保存不重复.   2.Log用Log4j, 隐藏一些log.  3. 界面美化: a. list可以显示/隐藏. b.用户登录  4. 自动抓取新的文章.
+//TODO: 1. 获取文章,并且保存不重复.   2.Log用Log4j, 隐藏一些log.
+// 3. 界面美化: a. list可以显示/隐藏. b.用户登录  4. 自动抓取新的文章.
+// 5.翻页
 
 var app = angular.module('rss', []);
+var pageSize = 10;
+
 app.controller('TaskCtrl', function ($scope, $http) {
         $scope.styles = {};
 
@@ -26,6 +31,8 @@ app.controller('TaskCtrl', function ($scope, $http) {
                 if ($scope.articles[i].link == link) {
                     $scope.content = $scope.articles[i].article;
                     $scope.title = $scope.articles[i].title;
+                    $scope.link = $scope.articles[i].link;
+                    $scope.linkcontent = "打开原始网址";
                     break;
                 }
             }
@@ -34,12 +41,13 @@ app.controller('TaskCtrl', function ($scope, $http) {
         //初始化数据
         $scope.initPage = function (siteId) {
             $scope.fetcureSites();
-            $scope.fectureAritcles(siteId);
+            //$scope.catchAritcles();
+            $scope.fectureAritcles(siteId, 1);
         };
 
         //刷新文章列表
-        $scope.fectureAritcles = function (siteId) {
-            $http.get("http://localhost:8080/articles?siteId=" + siteId)
+        $scope.fectureAritcles = function (siteId, pageNo) {
+            $http.get("http://www.sina.com.cn:8080/articles?siteId=" + siteId + '&pageNo=' + pageNo + '&pageSize=' + pageSize)
                 .success(function (response) {
                     $scope.articles = response.data;
                 });
@@ -53,11 +61,21 @@ app.controller('TaskCtrl', function ($scope, $http) {
             $scope.styles[siteId] = "active";
         };
 
+        //分页显示文章
+        $scope.fectureAritclesByPage = function (pageNo) {
+            for (var prop in $scope.styles) {
+                if ($scope.styles[prop] == "active") {
+                    $scope.fectureAritcles(prop, pageNo);
+                }
+            }
+        };
+
         //初始化site list
         $scope.fetcureSites = function () {
-            $http.get("http://localhost:8080/sites")
+            $http.get("http://www.sina.com.cn:8080/sites")
                 .success(function (response) {
                     $scope.sites = response.data;
+                    $scope.catchAritcles();
                 });
         };
 
@@ -66,18 +84,18 @@ app.controller('TaskCtrl', function ($scope, $http) {
                 console.log("siteid = " + $scope.sites[i].siteid);
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/articles',
-                    data: $scope.sites[i].siteid,
+                    url: 'http://www.sina.com.cn:8080/articles',
+                    data: 'siteId=' + $scope.sites[i].siteid,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest: function (obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    }
+                    //transformRequest: function (obj) {
+                    //    var str = [];
+                    //    for (var p in obj)
+                    //        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    //    return str.join("&");
+                    //}
                 })
                     .success(function (response) {
-                        console.log("response = " + response.data);
+                        console.log("response = " + response);
                     })
             }
         };

@@ -68,7 +68,7 @@ public class XMLRSSCather {
         //String content = dis.readLine();
         //System.out.println("Content = " + content);
         document = reader.read(in);
-        System.out.print("XML = " + document.asXML());
+        System.out.print("XML = " + document.asXML().substring(0,100));
         //document = DocumentHelper.parseText(content);
         return document;
     }

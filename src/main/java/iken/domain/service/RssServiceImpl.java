@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class RssServiceImpl implements RssService {
     public static final String ENTITY_SITE_ENTITY = "iken.persistence.entity.SiteEntity";
+    public static final String ENTITY_ARTICLE_ENTITY = "iken.persistence.entity.ArticleEntity";
+
     private String articleEntityName = "iken.persistence.entity.ArticleEntity";
 
     /**
@@ -24,10 +26,10 @@ public class RssServiceImpl implements RssService {
      * @return
      */
     @Override
-    public List<Article> getArticles(String siteId) {
+    public List<Article> getArticles(String siteId, int pageNo, int pageSize) {
         ArrayList<Article> artList = new ArrayList<>();
-        String sql = "from " + articleEntityName + " as article where article.siteid = " + siteId;
-        List<ArticleEntity> entityList = (List<ArticleEntity>) DBConnectionUtil.getQuery(sql);
+        String sql = "from " + articleEntityName + " as article where article.siteid = " + siteId + " order by createtime desc ";
+        List<ArticleEntity> entityList = (List<ArticleEntity>) DBConnectionUtil.getQuery(sql, pageNo, pageSize);
         for (ArticleEntity entity : entityList) {
             Article article = new Article();
             BeanUtils.copyProperties(entity, article);
@@ -73,8 +75,14 @@ public class RssServiceImpl implements RssService {
         ArticleEntity articleEntity = new ArticleEntity();
         BeanUtils.copyProperties(article, articleEntity);
 
-        DBConnectionUtil.addData(articleEntity);
-        return articleEntity.getId();
+        String sql = "from " + articleEntityName + " as article where article.link = '" + articleEntity.getLink()+"'";
+
+        List<ArticleEntity> entityList = (List<ArticleEntity>) DBConnectionUtil.getQuery(sql);
+        if (entityList.size() < 1) {
+            DBConnectionUtil.addData(articleEntity);
+            return articleEntity.getId();
+        }
+        return 0;
     }
 
     /**

@@ -11,6 +11,8 @@
           <element id="library" level="project" name="Hibernate" />
           <element id="library" level="project" name="Spring" />
           <element id="library" level="project" name="json" />
+          <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/junit.jar" />
+          <element id="library" level="module" name="JUnit4" module-name="lucas" />
         </element>
       </element>
     </root>

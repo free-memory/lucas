@@ -1,9 +1,6 @@
 package iken.persistence;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
@@ -35,11 +32,33 @@ public class DBConnectionUtil {
         return ourSessionFactory.openSession();
     }
 
-    public static List getQuery(String queryString) throws HibernateException {
+    public static List getQuery(String queryString, int pageNo, int pageSize) throws HibernateException {
         final Session session = getSession();
         List lstObject;
         try {
-            lstObject = session.createQuery(queryString).list();
+            Query query = session.createQuery(queryString);
+            query.setFirstResult((pageNo - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            lstObject = query.list();
+            System.out.println("querying result count = " + lstObject.size());
+
+        } finally {
+            session.close();
+        }
+        return lstObject;
+    }
+
+    public static List getQuery(String queryString) throws HibernateException {
+        final Session session = getSession();
+        int pageNo = 1;
+        int pageSize = 100;
+
+        List lstObject;
+        try {
+            Query query = session.createQuery(queryString);
+            query.setFirstResult((pageNo - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            lstObject = query.list();
             System.out.println("querying result count = " + lstObject.size());
 
         } finally {

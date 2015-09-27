@@ -23,7 +23,7 @@ public class RssServiceImplTest extends TestCase {
 
     @Test
     public void testGetArticles() throws Exception {
-        assertTrue(serviceImpl.getArticles("1002").size() > 0);
+        assertTrue(serviceImpl.getArticles("1002", 1, 10).size() > 0);
 
     }
 
@@ -37,7 +37,7 @@ public class RssServiceImplTest extends TestCase {
     }
 
     @Test
-    public void testDate() throws Exception{
+    public void testDate() throws Exception {
         String strDate = "Mon, 14 Sep 2015 15:55:24 +0800";
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
         Timestamp tm = new Timestamp(df.parse(strDate).getTime());

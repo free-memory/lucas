@@ -80,7 +80,7 @@ public class Article {
         return "Article{" +
                 "link='" + link + '\'' +
                 ", title='" + title + '\'' +
-                ", article='" + article + '\'' +
+                ", article='" + article.substring(0,20) + '\'' +
                 ", createtime=" + createtime +
                 '}';
     }

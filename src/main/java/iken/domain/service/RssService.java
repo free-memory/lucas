@@ -14,7 +14,7 @@ public interface RssService {
      *
      * @return
      */
-    List<Article> getArticles(String siteId);
+    List<Article> getArticles(String siteId, int pageNo, int pageSize);
 
 
     /**

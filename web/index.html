@@ -13,31 +13,31 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <div class="carousel slide" id="carousel-841549">
-                <ol class="carousel-indicators">
-                    <li class="active" data-slide-to="0" data-target="#carousel-841549">
-                    </li>
-                    <li data-slide-to="1" data-target="#carousel-841549">
-                    </li>
-                    <li data-slide-to="2" data-target="#carousel-841549">
-                    </li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img alt="" width="100%" src="img/header1.jpg"/>
-                    </div>
-                    <div class="item">
-                        <img alt="" width="100%" src="img/header2.jpg"/>
-                    </div>
-                    <div class="item">
-                        <img alt="" width="100%" src="img/header4.jpg"/>
-                    </div>
-                </div>
-                <a data-slide="prev" href="#carousel-841549" class="left carousel-control">‹</a>
-                <a data-slide="next"
-                   href="#carousel-841549"
-                   class="right carousel-control">›</a>
-            </div>
+            <!--<div class="carousel slide" id="carousel-841549">-->
+            <!--<ol class="carousel-indicators">-->
+            <!--<li class="active" data-slide-to="0" data-target="#carousel-841549">-->
+            <!--</li>-->
+            <!--<li data-slide-to="1" data-target="#carousel-841549">-->
+            <!--</li>-->
+            <!--<li data-slide-to="2" data-target="#carousel-841549">-->
+            <!--</li>-->
+            <!--</ol>-->
+            <!--<div class="carousel-inner">-->
+            <!--<div class="item active">-->
+            <!--<img alt="" width="100%" src="img/header1.jpg"/>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+            <!--<img alt="" width="100%" src="img/header2.jpg"/>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+            <!--<img alt="" width="100%" src="img/header4.jpg"/>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a data-slide="prev" href="#carousel-841549" class="left carousel-control">‹</a>-->
+            <!--<a data-slide="next"-->
+            <!--href="#carousel-841549"-->
+            <!--class="right carousel-control">›</a>-->
+            <!--</div>-->
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
@@ -87,44 +87,59 @@
         </div>
     </div>
     <div class="row-fluid">
-        <div class="span2">
+        <div id="sitelist" class="span2">
             <ul class="nav nav-list">
-                <li class="nav-header">
-                    RSS订阅列表
-                    <a class="right" href="javascript:" ng-click="catchAritcles()"><img src="img/refresh.jpg" width="16" height="16"> </a>
+                <li class="nav-header">RSS订阅列表<span style="margin: 0 0 0 10px">
+                    <a class="right" href="javascript:" ng-click="catchAritcles()">
+                        <img src="img/refresh.jpg" width="16" height="16">
+                    </a></span>
                 </li>
                 <li class="{{styles[item.siteid]}}" ng-repeat="item in sites">
-                    <a href="javascript:" ng-click="fectureAritcles(item.siteid)">{{item.name}}</a>
+                    <a href="javascript:" ng-click="fectureAritcles(item.siteid,1)">{{item.name}}</a>
                 </li>
             </ul>
         </div>
-        <div class="span4">
+
+        <div id="articlecontent" class="span6">
+            <div class="page-header">
+                <!--<input type="text" ng-model="title">-->
+                <h1>
+                    {{title}}
+                </h1>
+            </div>
+            <p align="right"><a href="{{link}}" target="_blank">{{linkcontent}}</a></p>
+
+            <p ng-bind-html="content|to_trusted" style="font-size: large">
+            </p>
+        </div>
+
+        <div id="articlelist" class="span4">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th>
-                        编号
-                    </th>
+                    <!--<th>-->
+                        <!--编号-->
+                    <!--</th>-->
                     <th>
                         标题
                     </th>
-                    <th>
-                        时间
-                    </th>
+                    <!--<th>-->
+                        <!--时间-->
+                    <!--</th>-->
                 </tr>
                 </thead>
                 <tbody ng-repeat="item in articles"
                        ng-click="show(item.link)">
                 <tr>
-                    <td>
-                        {{item.id}}
-                    </td>
+                    <!--<td>-->
+                        <!--{{item.id}}-->
+                    <!--</td>-->
                     <td>
                         {{item.title}}
                     </td>
-                    <td>
-                        {{item.createtime}}
-                    </td>
+                    <!--<td style="font-size: smaller">-->
+                        <!--{{item.createtime}}-->
+                    <!--</td>-->
                 </tr>
                 </tbody>
             </table>
@@ -135,27 +150,28 @@
                         <a href="#">上一页</a>
                     </li>
                     <li>
-                        <a href="#">1</a>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(1)">1</a>
                     </li>
                     <li>
-                        <a href="#">2</a>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(2)">2</a>
+                    </li>
+                    <li>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(3)">3</a>
+                    </li>
+                    <li>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(4)">4</a>
+                    </li>
+                    <li>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(5)">5</a>
+                    </li>
+                    <li>
+                        <a href="javascript:" ng-click="fectureAritclesByPage(6)">6</a>
                     </li>
                     <li>
                         <a href="#">下一页</a>
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="span6">
-            <div class="page-header">
-                <!--<input type="text" ng-model="title">-->
-                <h1>
-                    {{title}}
-                </h1>
-            </div>
-            <p ng-bind-html="content|to_trusted">
-                <!--{{content}}-->
-            </p>
         </div>
     </div>
     <div class="row-fluid">
@@ -165,8 +181,10 @@
             </p>
         </div>
     </div>
+
 </div>
 <script src="js/rss.js"></script>
+<script src="js/rssreader.js"></script>
 
 </body>
 </html>
