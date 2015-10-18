@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn" ng-app="rss">
+
 <head>
     <meta charset="UTF-8">
     <title>RSS Reader</title>
@@ -7,8 +8,8 @@
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
-
 </head>
+
 <body ng-controller="TaskCtrl" ng-init="initPage('1001')">
 <div class="container-fluid">
     <div class="row-fluid">
@@ -41,8 +42,7 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
-                        <a data-target=".navbar-responsive-collapse" data-toggle="collapse"
-                           class="btn btn-navbar"><span
+                        <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span
                                 class="icon-bar"></span><span class="icon-bar"></span><span
                                 class="icon-bar"></span></a>
                         <a href="#" class="brand">RSS 阅读器</a>
@@ -73,10 +73,8 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
-
             </div>
             <div class="alert hidden">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -99,7 +97,6 @@
                 </li>
             </ul>
         </div>
-
         <div id="articlecontent" class="span6">
             <div class="page-header">
                 <!--<input type="text" ng-model="title">-->
@@ -112,38 +109,35 @@
             <p ng-bind-html="content|to_trusted" style="font-size: large">
             </p>
         </div>
-
         <div id="articlelist" class="span4">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <!--<th>-->
-                        <!--编号-->
+                    <!--编号-->
                     <!--</th>-->
                     <th>
                         标题
                     </th>
                     <!--<th>-->
-                        <!--时间-->
+                    <!--时间-->
                     <!--</th>-->
                 </tr>
                 </thead>
-                <tbody ng-repeat="item in articles"
-                       ng-click="show(item.link)">
+                <tbody ng-repeat="item in articles" ng-click="show(item.link)">
                 <tr>
                     <!--<td>-->
-                        <!--{{item.id}}-->
+                    <!--{{item.id}}-->
                     <!--</td>-->
                     <td>
                         {{item.title}}
                     </td>
                     <!--<td style="font-size: smaller">-->
-                        <!--{{item.createtime}}-->
+                    <!--{{item.createtime}}-->
                     <!--</td>-->
                 </tr>
                 </tbody>
             </table>
-
             <div class="pagination text-center">
                 <ul>
                     <li>
@@ -181,10 +175,8 @@
             </p>
         </div>
     </div>
-
 </div>
-<script src="js/rss.js"></script>
-<script src="js/rssreader.js"></script>
-
+<!--<script src="build/lucas.js"></script>-->
+<script src="dist/lucas.min.js"></script>
 </body>
 </html>

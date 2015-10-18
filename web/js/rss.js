@@ -9,103 +9,95 @@
 
 var app = angular.module('rss', []);
 var pageSize = 10;
+var SITE_URL = "http://www.sina.com.cn:8080";
 
-app.controller('TaskCtrl', function ($scope, $http) {
-        $scope.styles = {};
-
-        //app.config(function ($httpProvider) {
-        //    $httpProvider.defaults.transformRequest = function (data) {
-        //        if (data === undefined) {
-        //            return data;
-        //        }
-        //        return $.param(data);
-        //    };
-        //    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-        //
-        //});
-
-
-        //显示文章正文
-        $scope.show = function (link) {
-            for (var i in $scope.articles) {
-                if ($scope.articles[i].link == link) {
-                    $scope.content = $scope.articles[i].article;
-                    $scope.title = $scope.articles[i].title;
-                    $scope.link = $scope.articles[i].link;
-                    $scope.linkcontent = "打开原始网址";
-                    break;
-                }
-            }
-        };
-
-        //初始化数据
-        $scope.initPage = function (siteId) {
-            $scope.fetcureSites();
-            //$scope.catchAritcles();
-            $scope.fectureAritcles(siteId, 1);
-        };
-
-        //刷新文章列表
-        $scope.fectureAritcles = function (siteId, pageNo) {
-            $http.get("http://www.sina.com.cn:8080/articles?siteId=" + siteId + '&pageNo=' + pageNo + '&pageSize=' + pageSize)
-                .success(function (response) {
-                    $scope.articles = response.data;
-                });
-
-            for (var prop in $scope.styles) {
-                if ($scope.styles.hasOwnProperty(prop)) {
-                    //console.log('key is ' + prop + ' and value is' + $scope.styles[prop]);
-                    $scope.styles[prop] = "none";
-                }
-            }
-            $scope.styles[siteId] = "active";
-        };
-
-        //分页显示文章
-        $scope.fectureAritclesByPage = function (pageNo) {
-            for (var prop in $scope.styles) {
-                if ($scope.styles[prop] == "active") {
-                    $scope.fectureAritcles(prop, pageNo);
-                }
-            }
-        };
-
-        //初始化site list
-        $scope.fetcureSites = function () {
-            $http.get("http://www.sina.com.cn:8080/sites")
-                .success(function (response) {
-                    $scope.sites = response.data;
-                    $scope.catchAritcles();
-                });
-        };
-
-        $scope.catchAritcles = function () {
-            for (var i in $scope.sites) {
-                console.log("siteid = " + $scope.sites[i].siteid);
-                $http({
-                    method: 'POST',
-                    url: 'http://www.sina.com.cn:8080/articles',
-                    data: 'siteId=' + $scope.sites[i].siteid,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    //transformRequest: function (obj) {
-                    //    var str = [];
-                    //    for (var p in obj)
-                    //        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    //    return str.join("&");
-                    //}
-                })
-                    .success(function (response) {
-                        console.log("response = " + response);
-                    })
-            }
-        };
-    }
-)
-;
 
 app.filter('to_trusted', ['$sce', function ($sce) {
         return function (text) {
             return $sce.trustAsHtml(text);
-        }
+        };
     }]
 );
+
+var RssControl = function ($scope, $http) {
+    $scope.styles = {};
+
+    //显示文章正文
+    $scope.show = function (link) {
+        for (var i in $scope.articles) {
+            if ($scope.articles[i].link === link) {
+                $scope.content = $scope.articles[i].article;
+                $scope.title = $scope.articles[i].title;
+                $scope.link = $scope.articles[i].link;
+                $scope.linkcontent = "打开原始网址";
+                break;
+            }
+        }
+    };
+
+    //初始化数据
+    $scope.initPage = function (siteId) {
+        $scope.fetcureSites();
+        //$scope.catchAritcles();
+        $scope.fectureAritcles(siteId, 1);
+    };
+
+    //刷新文章列表
+    $scope.fectureAritcles = function (siteId, pageNo) {
+        $http.get(SITE_URL + "/articles?siteId=" + siteId + '&pageNo=' + pageNo + '&pageSize=' + pageSize)
+            .success(function (response) {
+                $scope.articles = response.data;
+            });
+
+        for (var prop in $scope.styles) {
+            if ($scope.styles.hasOwnProperty(prop)) {
+                //console.log('key is ' + prop + ' and value is' + $scope.styles[prop]);
+                $scope.styles[prop] = "none";
+            }
+        }
+        $scope.styles[siteId] = "active";
+    };
+
+    //分页显示文章
+    $scope.fectureAritclesByPage = function (pageNo) {
+        for (var prop in $scope.styles) {
+            if ($scope.styles[prop] === "active") {
+                $scope.fectureAritcles(prop, pageNo);
+            }
+        }
+    };
+
+    //初始化site list
+    $scope.fetcureSites = function () {
+        $http.get(SITE_URL + "/sites")
+            .success(function (response) {
+                $scope.sites = response.data;
+                $scope.catchAritcles();
+            });
+    };
+
+    //Get data from server via http
+    function getDataFromServer(i) {
+        $http({
+            method: 'POST',
+            url: SITE_URL + '/articles',
+            data: 'siteId=' + $scope.sites[i].siteid,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        })
+            .success(function (response) {
+                console.log("response = " + response);
+            });
+    }
+
+    //取到文章list
+    $scope.catchAritcles = function () {
+        for (var i in $scope.sites) {
+            console.log("siteid = " + $scope.sites[i].siteid);
+            getDataFromServer(i);
+        }
+    };
+};
+
+//RssControl.$inject = ['$scope', '$http'];
+
+app.controller('TaskCtrl', ['$scope', '$http', RssControl]);
