@@ -44,8 +44,11 @@ module.exports = function (grunt) {
                 boss: true,
                 eqnull: true,
                 browser: true,
+                jquery: true,
                 globals: {
-                    jQuery: true
+                    angular: false,
+                    $: false,
+                    console: false
                 }
             },
             gruntfile: {
